@@ -1,0 +1,30 @@
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  # Every Vagrant virtual environment requires a box to build off of.
+  # To select the base box when executing, we use the environment variable VAGRANT_BASE_BOX here.
+
+  config.vm.box = "debian/contrib-jessie64" 
+
+  config.vm.provider "virtualbox" do |vbox|
+    vbox.memory = 2048
+    vbox.cpus = 2
+  end
+
+  config.vm.define "slave" do |slave|
+    slave.vm.provision "ansible" do |ansible|
+        ansible.playbook = "slave.yml"
+    end
+    slave.vm.network "private_network", ip: "192.168.0.124"
+  end
+
+  config.vm.define "master", primary: true do |master|
+    master.vm.provision "ansible" do |ansible|
+        ansible.playbook = "master.yml"
+    end
+    master.vm.network "private_network", ip: "192.168.0.123"
+    master.vm.network :forwarded_port, guest: 8081, host: 9091, autocorrect: true
+    master.vm.network :forwarded_port, guest: 50070, host: 50070, autocorrect: true
+  end
+end

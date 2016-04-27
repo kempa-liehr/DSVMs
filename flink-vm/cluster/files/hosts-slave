@@ -1,0 +1,3 @@
+127.0.0.1       localhost
+127.0.1.1       slave.phi-tps.local     slave
+192.168.0.123   master.phi-tps.local    master

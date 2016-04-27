@@ -1,0 +1,3 @@
+hadoop_name : 'hadoop-2.7.0'
+hadoop_archive : '{{hadoop_name}}.tar.gz'
+hadoop_url : 'http://ftp-stud.hs-esslingen.de/pub/Mirrors/ftp.apache.org/dist/hadoop/common/{{hadoop_name}}/{{hadoop_archive}}'

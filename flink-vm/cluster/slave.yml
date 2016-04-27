@@ -1,0 +1,49 @@
+- name: Install VM for SePIA.Pro
+  hosts: slave
+  user: vagrant
+  become: yes
+  
+  vars:
+    user_name: "vagrant"
+
+  pre_tasks:
+    - name: Set hostname
+      hostname: name=slave
+
+    - name: Copy etc/hosts
+      copy: src=files/hosts-slave dest=/etc/hosts
+
+    # master needs the slaves hostkey
+    - name: Fetch public hostkey
+      fetch: src=/etc/ssh/{{ item }} dest=files/ssh
+      with_items:
+        - ssh_host_ecdsa_key.pub
+
+    # setup passwordless ssh
+    - name: Copy public ssh key
+      become_user: "{{user_name}}"
+      copy: src=files/ssh/id_rsa.pub dest=~/.ssh
+
+    - name: Copy private ssh key
+      become_user: "{{user_name}}"
+      copy: src=files/ssh/id_rsa dest=~/.ssh mode="0600"
+
+    - name: Add master public key to authorized hosts
+      become_user: "{{user_name}}"
+      shell: cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+
+    - name: Install required packages
+      apt: pkg={{ item }} state=latest update_cache=yes
+      with_items:
+        - openjdk-7-jre-headless
+        - python
+        - python-sklearn
+        - rsync
+
+  roles:
+    - role: apache_flink
+
+  post_tasks:
+    - name: Copy flink worker conf file
+      become_user: "{{user_name}}"
+      copy: src=files/worker-flink-conf.yaml dest=~/flink/conf/flink-conf.yaml

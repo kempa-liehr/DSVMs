@@ -1,0 +1,26 @@
+- name: Download Hadoop
+  get_url: url='{{hadoop_url}}' dest='/tmp/{{hadoop_archive}}'
+
+- name: Unarchive Hadoop
+  become_user: "{{user_name}}"
+  unarchive: copy=no src='/tmp/{{hadoop_archive}}' dest='~/'
+
+- name: Link Hadoop
+  become_user: "{{user_name}}"
+  file: src='~/{{hadoop_name}}' dest='~/hadoop' state=link
+
+- name: Copy config files (1)
+  become_user: "{{user_name}}"
+  copy: src=core-site.xml dest=~/hadoop/etc/hadoop
+
+- name: Copy config files (2)
+  become_user: "{{user_name}}"
+  copy: src=hdfs-site.xml dest=~/hadoop/etc/hadoop
+
+- name: Format name node
+  become_user: "{{user_name}}"
+  command: hadoop/bin/hdfs namenode -format
+
+- name: Start DFS
+  become_user: "{{user_name}}"
+  command: hadoop/sbin/start-dfs.sh

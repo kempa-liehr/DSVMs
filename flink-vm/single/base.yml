@@ -1,0 +1,23 @@
+- name: Setup VM for SePIA.Pro
+  hosts: all 
+  user: vagrant
+  become: yes
+
+  vars:
+    user_name: "vagrant"
+
+  pre_tasks:
+    - name: Install required packages
+      apt: pkg={{ item }} state=latest update_cache=yes
+      with_items:
+        - openjdk-7-jre-headless
+        - python
+        - python-sklearn
+
+  roles:
+    - role: apache_flink
+
+  post_tasks:
+    - name: start flink local
+      become_user: "{{user_name}}"
+      command: ~/flink/bin/start-local.sh

@@ -1,0 +1,21 @@
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  # Every Vagrant virtual environment requires a box to build off of.
+  # To select the base box when executing, we use the environment variable VAGRANT_BASE_BOX here.
+
+  config.vm.box = "debian/contrib-jessie64" 
+
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 4096
+    v.cpus   = 4
+  end
+  
+  config.vm.provision "ansible" do |ansible|
+      ansible.playbook = "base.yml"
+  end
+
+  # Forward the apache flink web dashboard
+  config.vm.network :forwarded_port, guest: 8081, host: 9091, auto_correct: true
+end
