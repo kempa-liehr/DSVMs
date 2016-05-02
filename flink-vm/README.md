@@ -1,4 +1,6 @@
-# SePiaPro VMs
+# Flink VMs
+
+Easily set up a minimal working Flink environment.
 
 ## Requirements
 * vagrant
@@ -10,8 +12,7 @@
 
 ## Quick start
 ```bash
-$ git clone ssh://git@code.blue-yonder.org:7999/sepiapro/sepiapro_vms.git
-$ cd sepiapro_vms/single
+$ cd single
 $ vagrant up
 ```
 
@@ -27,8 +28,7 @@ $ cat result.txt
 
 ## Cluster
 ```bash
-$ git clone ssh://git@code.blue-yonder.org:7999/sepiapro/sepiapro_vms.git
-$ cd sepiapro_vms/cluster
+$ cd cluster
 $ ./setup.sh  # generate ssh keys
 $ vagrant ssh
 $ pyflink2.sh examples/cluster_mae.py
