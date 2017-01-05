@@ -1,3 +1,3 @@
-flink_ver : '1.0.1'
+flink_ver : '1.1.4'
 flink_hadoop_ver : 'hadoop27'
-flink_scala_ver : '2.10'
+flink_scala_ver : '2.11'
