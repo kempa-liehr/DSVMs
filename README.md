@@ -2,7 +2,7 @@
 The rapid development of technology for data science applications frequently demands to test established or developing frameworks.
 Virtualization provides the infrastructure for efficient [tracer bullet development](http://growsmethod.com/grows_tracer_bullets.html).
 
-This repository orginated from the BMWi funded project [SePiA.Pro](http://projekt-sepiapro.de) and has been used for automating the provisiong of [Apache Flink](https://flink.apache.org) on basis of [OpenTOSCA](http://www.opentosca.org) [1,2].
+This repository orginated from the BMWi funded project [SePiA.Pro](http://projekt-sepiapro.de) and has been used for automating the provisioning of [Apache Flink](https://flink.apache.org) on basis of [OpenTOSCA](http://www.opentosca.org) [1,2].
 
 [1] M. Falkenthal, U. Breitenbücher, M. Christ, Ch. Endres, A.W. Kempa-Liehr, F. Leymann, M. Zimmermann (2016): [Towards Function and Data Shipping in Manufacturing Environments: How Cloud Technologies leverage the 4th Industrial Revolution](http://domino.watson.ibm.com/library/CyberDig.nsf/1e4115aea78b6e7c85256b360066f0d4/ec7d5d883519dc7e85258035004dbd19). In: J. Barzen, R. Khalaf, F. Leymann, B. Mitschang (Editors): _Proceedings of the 10th Advanced Summer School on Service Oriented Computing_. IBM Research Report (RC25624), IBM Research Division: Almaden, p. 16-25
 
